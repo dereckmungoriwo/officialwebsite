@@ -15,7 +15,7 @@
 /* ── Filter Bar ── */
 .projects-filter {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   margin-bottom: 52px;
 }
@@ -25,7 +25,7 @@
   font-size: 0.84rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  padding: 11px 18px;
+  padding: 10px 18px;
   border: 1px solid rgba(15,31,56,0.10);
   border-radius: 999px;
   background: var(--surface);
@@ -33,14 +33,23 @@
   cursor: pointer;
   transition: all var(--transition);
   box-shadow: var(--shadow-xs);
+  /* FIX: never force full-width on filter buttons — they work as a pill group */
+  width: auto;
 }
 
-.filter-btn:hover,
+.filter-btn:hover {
+  background: rgba(15,31,56,0.06);
+  border-color: rgba(15,31,56,0.16);
+  color: var(--navy);
+  transform: translateY(-1px);
+}
+
 .filter-btn.active {
   background: var(--navy);
   border-color: var(--navy);
   color: var(--white);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
 }
 
 /* ── Grid ── */
@@ -65,31 +74,33 @@
 .project-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(199,165,91,0.22);
+  border-color: rgba(199,165,91,0.28);
 }
 
 .project-card-header {
-  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
-  padding: 40px 34px 30px;
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  padding: 38px 34px 30px;
   position: relative;
   overflow: hidden;
 }
 
+/* decorative accent circle */
 .project-card-header::before {
   content: '';
   position: absolute;
-  bottom: -34px;
-  right: -34px;
-  width: 130px;
-  height: 130px;
+  bottom: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.04);
+  background: rgba(199,165,91,0.06);
+  pointer-events: none;
 }
 
 .project-category {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -99,7 +110,7 @@
 
 .project-title {
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: 1.65rem;
   font-weight: 600;
   color: var(--white);
   line-height: 1.18;
@@ -108,24 +119,27 @@
 }
 
 .project-problem {
-  font-size: 0.98rem;
-  color: rgba(255,255,255,0.68);
+  font-size: 0.97rem;
+  color: rgba(255,255,255,0.66);
   line-height: 1.8;
-  max-width: 54ch;
 }
 
+/* soft gradient fade between dark header and light body */
 .project-card-body {
   padding: 30px 34px 32px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  background: var(--surface);
+  /* FIX: subtle top border creates a clean visual break instead of abrupt contrast */
+  border-top: 2px solid rgba(199,165,91,0.12);
 }
 
 .project-meta-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .project-meta h5 {
@@ -141,34 +155,39 @@
 .project-tools {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 
 .tool-tag {
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   font-weight: 500;
   background: rgba(15,31,56,0.04);
   color: var(--navy);
-  border: 1px solid rgba(15,31,56,0.08);
-  padding: 7px 11px;
+  border: 1px solid rgba(15,31,56,0.09);
+  padding: 6px 11px;
   border-radius: 999px;
   line-height: 1.2;
 }
 
 .project-outcome {
-  font-size: 0.98rem;
+  font-size: 0.97rem;
   color: var(--text-mid);
   line-height: 1.85;
-  margin-bottom: 28px;
+  margin-bottom: 26px;
   flex: 1;
+  background: rgba(15,31,56,0.025);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 16px;
 }
 
 .project-outcome strong {
   display: block;
   margin-bottom: 8px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--navy);
 }
 
@@ -179,6 +198,7 @@
   gap: 16px;
   padding-top: 20px;
   border-top: 1px solid rgba(15,31,56,0.08);
+  margin-top: auto;
 }
 
 .project-status {
@@ -203,37 +223,38 @@
   background: var(--accent);
 }
 
+/* FIX: removed ::after arrow — HTML already contains the arrow text.
+   Keeping only the hover colour + translate effect. */
 .project-link {
   font-size: 0.84rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--navy);
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  transition: color var(--transition), transform var(--transition);
+  gap: 6px;
+  transition: color var(--transition), gap var(--transition);
 }
 
 .project-link:hover {
   color: var(--accent);
-  transform: translateX(2px);
-}
-
-.project-link::after {
-  content: '→';
-  font-size: 0.9rem;
+  gap: 10px;
 }
 
 /* ── Featured Project ── */
+/* On desktop: full-width row with header on the left, body on the right */
 .project-card.featured {
   grid-column: 1 / -1;
   flex-direction: row;
+  border: 1px solid rgba(199,165,91,0.20);
 }
 
 .project-card.featured .project-card-header {
-  flex: 0 0 42%;
+  flex: 0 0 44%;
   padding: 48px 40px;
+  /* override the default corner radius so it only rounds the left side */
+  border-radius: 0;
 }
 
 .project-card.featured .project-title {
@@ -246,16 +267,44 @@
 
 .project-card.featured .project-card-body {
   padding: 38px 40px;
+  border-top: none;
+  /* FIX: on the featured card the body sits to the right of the header,
+     so use a left border accent instead of top */
+  border-left: 2px solid rgba(199,165,91,0.18);
 }
 
-/* ── CTA ── */
+/* FIX: when featured card collapses, give it a visual distinction
+   via a gold top accent bar so it still reads as "featured" */
+@media (max-width: 980px) {
+  .project-card.featured {
+    flex-direction: column;
+  }
+
+  .project-card.featured .project-card-header {
+    flex: none;
+  }
+
+  .project-card.featured .project-card-body {
+    border-left: none;
+    border-top: 3px solid var(--accent);
+  }
+
+  /* "Featured" label becomes a visible pill badge in the category span
+     so the card still feels elevated among the others */
+  .project-card.featured .project-category::before {
+    content: '★ ';
+    color: var(--accent);
+  }
+}
+
+/* ── Projects CTA ── */
 .projects-cta {
-  background: linear-gradient(180deg, #fbfaf7 0%, #f5f1e8 100%);
+  background: linear-gradient(160deg, #fbfaf7 0%, #f4f0e6 100%);
   border: 1px solid rgba(15,31,56,0.08);
   border-radius: var(--radius-lg);
-  padding: 50px 34px;
+  padding: 52px 40px;
   text-align: center;
-  margin-top: 42px;
+  margin-top: 44px;
   box-shadow: var(--shadow-soft);
 }
 
@@ -272,25 +321,11 @@
   font-size: 1rem;
   color: var(--text-mid);
   line-height: 1.85;
-  max-width: 680px;
-  margin: 0 auto 26px;
+  max-width: 640px;
+  margin: 0 auto 28px;
 }
 
 /* ── Responsive ── */
-@media (max-width: 980px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project-card.featured {
-    flex-direction: column;
-  }
-
-  .project-card.featured .project-card-header {
-    flex: none;
-  }
-}
-
 @media (max-width: 768px) {
   .projects-section {
     padding: 72px 24px 88px;
@@ -306,43 +341,38 @@
 
   .project-title,
   .project-card.featured .project-title {
-    font-size: 1.58rem;
-  }
-
-  .project-problem,
-  .project-outcome,
-  .projects-cta p {
-    font-size: 0.98rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .projects-filter {
-    gap: 10px;
-    margin-bottom: 40px;
-  }
-
-  .filter-btn {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .project-meta-row {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .project-card-footer {
-    flex-direction: column;
-    align-items: flex-start;
+    font-size: 1.55rem;
   }
 
   .projects-cta {
-    padding: 34px 22px;
+    padding: 38px 24px;
   }
 
   .projects-cta h3 {
     font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* FIX: pills wrap naturally — never force full width on filter buttons.
+     On very small screens allow them to scroll horizontally instead. */
+  .projects-filter {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .project-meta-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .project-card-footer {
+    flex-wrap: wrap;
+    gap: 12px;
   }
 }

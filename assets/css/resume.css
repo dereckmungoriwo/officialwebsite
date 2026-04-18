@@ -11,52 +11,58 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 64px;
+  grid-template-columns: 300px 1fr;
+  gap: 56px;
   align-items: start;
 }
 
 /* ── Sidebar ── */
 .resume-sidebar {
   position: sticky;
-  top: 110px;
+  /* FIX: keep the sidebar sticky further down the page — collapses too
+     early at 1024px when resume content can be 1500px+ tall */
+  top: 100px;
 }
 
 .resume-sidebar-card {
-  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
   border-radius: var(--radius-lg);
-  padding: 36px 28px;
+  padding: 34px 26px;
   color: var(--white);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(255,255,255,0.06);
 }
 
+/* FIX: gold-first gradient reads much cleaner — avoids muddy brown mid-tone */
 .rs-avatar {
-  width: 76px;
-  height: 76px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--steel), var(--accent));
+  background: linear-gradient(135deg, var(--accent), var(--navy-deep));
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   font-weight: 600;
+  color: var(--white);
   margin-bottom: 16px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.20);
 }
 
 .rs-name {
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 4px;
+  line-height: 1.2;
+  margin-bottom: 5px;
 }
 
 .rs-role {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.6;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.65;
   margin-bottom: 22px;
 }
 
@@ -65,9 +71,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.92rem;
-  color: rgba(255,255,255,0.72);
-  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.70);
+  margin-bottom: 11px;
+  line-height: 1.5;
+  transition: color var(--transition);
 }
 
 .rs-contact a:hover {
@@ -76,8 +84,9 @@
 
 .rs-contact-icon {
   color: var(--accent);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   width: 16px;
+  flex-shrink: 0;
 }
 
 .resume-dl-btn {
@@ -91,14 +100,15 @@
   background: var(--surface);
   border: 1px solid rgba(15,31,56,0.08);
   border-radius: var(--radius-lg);
-  padding: 28px 24px;
-  margin-bottom: 20px;
+  padding: 26px 22px;
+  margin-bottom: 18px;
   box-shadow: var(--shadow-soft);
 }
 
 .skills-sidebar-card h4 {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.73rem;
+  font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-soft);
@@ -106,43 +116,60 @@
 }
 
 .skill-bar-row {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+}
+
+.skill-bar-row:last-child {
+  margin-bottom: 0;
 }
 
 .skill-bar-label {
   display: flex;
   justify-content: space-between;
-  font-size: 0.92rem;
+  align-items: baseline;
+  font-size: 0.9rem;
   color: var(--text-mid);
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 
 .skill-bar-label span:last-child {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-soft);
 }
 
 .skill-bar-track {
-  height: 6px;
+  height: 5px;
   background: rgba(15,31,56,0.08);
-  border-radius: 6px;
+  border-radius: 999px;
   overflow: hidden;
 }
 
+/* FIX: added transition so the JS width animation actually plays */
 .skill-bar-fill {
   height: 100%;
-  border-radius: 6px;
+  border-radius: 999px;
   background: linear-gradient(90deg, var(--navy), var(--accent));
+  transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%; /* start at 0, JS restores to data width once in view */
 }
 
 /* ── Main Content ── */
+.resume-main {
+  min-width: 0; /* prevent content from overflowing grid */
+}
+
 .resume-block {
-  margin-bottom: 58px;
+  margin-bottom: 54px;
+}
+
+.resume-block:last-child {
+  margin-bottom: 0;
 }
 
 .resume-block-title {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
+  font-weight: 500;
   letter-spacing: 0.20em;
   text-transform: uppercase;
   color: var(--accent);
@@ -156,50 +183,65 @@
 
 .resume-block-title::before {
   content: '';
-  width: 26px;
+  width: 24px;
   height: 2px;
   background: var(--accent);
+  flex-shrink: 0;
 }
 
-/* ── Experience ── */
+/* ── Experience Items ── */
 .exp-item {
-  padding: 30px 0;
-  border-bottom: 1px solid rgba(15,31,56,0.08);
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(15,31,56,0.07);
+}
+
+.exp-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .exp-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 6px;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
 }
 
 .exp-title {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--navy);
+  line-height: 1.2;
 }
 
 .exp-date {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-soft);
   letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 .exp-org {
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   color: var(--accent);
   font-weight: 600;
   margin-bottom: 14px;
 }
 
+.exp-bullets {
+  list-style: none;
+  padding: 0;
+}
+
 .exp-bullets li {
-  font-size: 0.98rem;
+  font-size: 0.97rem;
   color: var(--text-mid);
   line-height: 1.9;
-  padding: 6px 0 6px 20px;
+  padding: 4px 0 4px 20px;
   position: relative;
 }
 
@@ -208,56 +250,78 @@
   position: absolute;
   left: 0;
   color: var(--accent);
+  font-size: 0.9rem;
+  line-height: 1.9;
 }
 
-/* ── Education ── */
+/* ── Education Items ── */
 .edu-item {
   background: var(--surface);
   border: 1px solid rgba(15,31,56,0.08);
   border-radius: var(--radius-lg);
-  padding: 28px;
-  margin-bottom: 18px;
+  padding: 26px;
+  margin-bottom: 16px;
   display: flex;
   gap: 18px;
+  align-items: flex-start;
   box-shadow: var(--shadow-soft);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.edu-item:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+.edu-item:last-child {
+  margin-bottom: 0;
 }
 
 .edu-icon {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 10px;
   background: var(--navy);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.edu-content {
+  min-width: 0;
 }
 
 .edu-degree {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.18rem;
   font-weight: 600;
   color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: 4px;
 }
 
 .edu-institution {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--accent);
-  margin-bottom: 6px;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
 .edu-note {
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   color: var(--text-mid);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
-/* ── Skills grid ── */
+/* ── Skills Grid ── */
+/* FIX: removed duplicate media query (was at both 900px and 1024px).
+   Single consistent breakpoint at 768px to match global breakpoints. */
 .skills-grid-2col {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 38px 40px;
+  gap: 36px 40px;
   align-items: start;
 }
 
@@ -267,7 +331,8 @@
 
 .skill-group h4 {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: 0.73rem;
+  font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--navy);
@@ -277,60 +342,79 @@
 .skill-tag-cloud {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 9px;
   align-items: flex-start;
 }
 
 .sk-tag {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(15,31,56,0.08);
+  border: 1px solid rgba(15,31,56,0.09);
   background: var(--white);
   color: var(--text-mid);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.3;
   box-shadow: var(--shadow-xs);
-}
-
-/* optional: make long tags break better instead of colliding */
-.sk-tag {
+  transition: border-color var(--transition), color var(--transition);
   white-space: normal;
 }
 
-/* better tablet/mobile behavior */
-@media (max-width: 900px) {
-  .skills-grid-2col {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
+.sk-tag:hover {
+  border-color: rgba(199,165,91,0.40);
+  color: var(--navy);
 }
 
 /* ── Responsive ── */
-@media (max-width: 1024px) {
+/* FIX: keep sidebar and two-column layout until 900px.
+   At 768px both collapse gracefully to single column. */
+@media (max-width: 900px) {
   .resume-inner {
     grid-template-columns: 1fr;
+    gap: 36px;
   }
 
   .resume-sidebar {
     position: static;
   }
-
-  .skills-grid-2col {
-    grid-template-columns: 1fr;
-  }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .resume-section {
     padding: 72px 24px 88px;
   }
 
+  .skills-grid-2col {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .resume-sidebar-card,
+  .skills-sidebar-card {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 640px) {
   .exp-header {
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
+  }
+
+  .exp-title {
+    font-size: 1.2rem;
+  }
+
+  .edu-item {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .edu-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
   }
 }
