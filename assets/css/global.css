@@ -56,6 +56,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  /* Prevents fixed nav from covering section headings on anchor jump */
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -65,6 +67,13 @@ body {
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Ensures Cormorant Garamond applies to all headings,
+   not only those carrying an explicit class */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
 }
 
 a {
@@ -277,6 +286,13 @@ section {
   display: none !important;
 }
 
+/* Active state for Contact link when nav-cta and active both apply */
+.nav-cta.active {
+  background: var(--accent);
+  color: var(--navy-deep) !important;
+  border-color: transparent;
+}
+
 /* ── Mobile Nav ── */
 .nav-toggle {
   display: none;
@@ -440,7 +456,7 @@ select {
   padding: 15px 16px;
   font-size: 0.98rem;
   line-height: 1.5;
-  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition);
   outline: none;
 }
 
@@ -459,6 +475,13 @@ textarea:focus,
 select:focus {
   border-color: rgba(199,165,91,0.9);
   box-shadow: 0 0 0 4px rgba(199,165,91,0.12);
+}
+
+/* ── Accessibility — keyboard focus ring ── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* ── Footer ── */
@@ -544,6 +567,13 @@ select:focus {
   transform: translateY(0);
 }
 
+/* ── Mobile hero stats fallback ──
+   Shown on small screens when the hero card sidebar is hidden.
+   Add the matching HTML to index.html — see comment at bottom of file. */
+.hero-stat-mobile {
+  display: none;
+}
+
 /* ── Links in content ── */
 .text-link {
   color: var(--navy);
@@ -615,7 +645,37 @@ select:focus {
     align-items: flex-start;
   }
 
-  .btn {
+  /* Show the condensed inline stat strip in the hero on mobile */
+  .hero-stat-mobile {
+    display: flex;
+    gap: 28px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .hero-stat-mobile .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .hero-stat-mobile .stat-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.52);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Scope full-width buttons only to hero-actions and standalone form submits.
+     This prevents CTA banner side-by-side buttons from breaking. */
+  .hero-actions .btn,
+  .form-submit .btn,
+  .resume-dl-btn {
     width: 100%;
   }
 }
@@ -635,3 +695,55 @@ select:focus {
     font-size: 0.92rem;
   }
 }
+
+/* ── Reduced motion — accessibility ── */
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-title,
+  .hero-eyebrow,
+  .hero-subtitle,
+  .hero-actions,
+  .hero-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .skill-bar-fill {
+    transition: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/*
+  ── HTML ADDITION for mobile hero stats ──
+  Add this block inside .hero-content in index.html,
+  immediately after the closing </div> of .hero-actions:
+
+  <div class="hero-stat-mobile">
+    <div>
+      <div class="stat-num">5+</div>
+      <div class="stat-desc">Years Operational Experience</div>
+    </div>
+    <div>
+      <div class="stat-num">3</div>
+      <div class="stat-desc">Professional Certifications</div>
+    </div>
+  </div>
+
+  ── FOOTER EMAIL — Fix in index.html, resume.html, projects.html ──
+  Find:    your@email.com
+  Replace: dereck@dereckmungoriwo.com
+
+  Find:    linkedin.com/in/yourprofile
+  Replace: linkedin.com/in/dereckmungoriwo
+*/
