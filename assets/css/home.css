@@ -98,6 +98,7 @@
   height: 1px;
   background: var(--accent);
   display: inline-block;
+  text-align: center;
 }
 
 .hero-title {
