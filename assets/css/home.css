@@ -287,6 +287,11 @@
   align-items: center;
 }
 
+.about-preview eyebrow: before {
+  content: "// ";
+  color: var(--accent);
+}
+
 .about-visual {
   position: relative;
 }
