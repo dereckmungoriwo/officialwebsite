@@ -372,7 +372,6 @@
 }
 
 .cta-banner .btn {
-.btn-primary {
   position: relative;
   background: var(--navy);
   backgroundleft: var(--gold);
