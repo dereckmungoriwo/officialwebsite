@@ -595,6 +595,13 @@
     padding-bottom: 80px;
   }
 
+  .about-preview-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+
   .cta-banner {
     padding-top: 76px;
     padding-bottom: 76px;
