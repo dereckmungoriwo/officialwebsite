@@ -7,6 +7,7 @@
   min-height: auto;
   display: flex;
   align-items: center;
+  text-align: center;
   background:
     radial-gradient(circle at top right, rgba(199,165,91,0.13), transparent 36%),
     linear-gradient(180deg, var(--ivory) 0%, #f0ece1 100%);
