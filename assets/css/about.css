@@ -373,6 +373,8 @@
 
 .cta-banner .btn {
   position: relative;
+  background: var(--navy);
+  color: var(--white);
 }
 
 /* ── Responsive ── */
