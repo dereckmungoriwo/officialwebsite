@@ -302,7 +302,7 @@
 }
 
 .about-visual-card::before {
-  content: "// ";
+  content: '';
   position: absolute;
   top: -44px;
   right: -44px;
@@ -438,7 +438,7 @@
 }
 
 .skill-card::before {
-  content: "''";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -503,7 +503,7 @@
 }
 
 .cta-banner::before {
-  content: "''";
+  content: '';
   position: absolute;
   inset: 0;
   background-image:
