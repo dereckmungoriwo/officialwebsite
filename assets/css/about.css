@@ -371,12 +371,6 @@
   position: relative;
 }
 
-.cta-banner .btn {
-  position: relative;
-  background: var(--navy);
-  color: var(--white);
-}
-
 .btn-primary {
   background: var(--navy);
   color: var(--white);
