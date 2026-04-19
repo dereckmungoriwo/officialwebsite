@@ -83,19 +83,19 @@
   display: inline-block;
 }
 
-/* Title switches from white to navy on the light background */
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(3rem, 6vw, 5.2rem);
   font-weight: 500;
   color: var(--navy);
-  line-height: 1.02;
+  line-height: 1.05;
   letter-spacing: -0.025em;
   margin-bottom: 26px;
-  max-width: 12ch;
+  max-width: none; /* 🔥 IMPORTANT: removes forced wrapping */
 }
 
 .hero-title em {
+  display: block;        /* forces second line */
   font-style: italic;
   color: var(--accent);
 }
