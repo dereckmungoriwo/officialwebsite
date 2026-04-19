@@ -543,6 +543,37 @@
   position: relative;
 }
 
+.about-preview {
+  padding: 110px 40px;
+  background: var(--ivory);
+}
+
+.about-preview-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+.about-text {
+  margin: 0 auto;
+  max-width: 850px;
+}
+
+.about-preview .section-heading {
+  margin-bottom: 24px;
+}
+
+.about-preview .section-subtext {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-text .btn {
+  margin-top: 30px;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1100px) {
   .hero-content {
@@ -593,13 +624,6 @@
   .skills-preview {
     padding-top: 80px;
     padding-bottom: 80px;
-  }
-
-  .about-preview-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
   }
 
   .cta-banner {
