@@ -92,7 +92,7 @@
 }
 
 .hero-eyebrow::before {
-  content: "// ";
+  content: " ── // ";
   color: var(--accent);
 }
 
@@ -285,11 +285,6 @@
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
-}
-
-.about-preview eyebrow: before {
-  content: "// ";
-  color: var(--accent);
 }
 
 .about-visual {
