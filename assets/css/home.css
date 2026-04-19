@@ -593,6 +593,13 @@
   }
 }
 
+.skills-preview-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .hero {
     padding: 120px 24px 72px;
