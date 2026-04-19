@@ -373,10 +373,8 @@
 
 .cta-banner .btn {
   position: relative;
-  background: var(--navy);
-  backgroundleft: var(--gold);
-  color: var(--white);
 }
+
 /* ── Responsive ── */
 @media (max-width: 1100px) {
   .story-inner {
