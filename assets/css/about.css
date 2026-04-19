@@ -331,11 +331,53 @@
   margin-left: 10px;
 }
 
-.cta-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: block;
+/* ── CTA Banner ── */
+.cta-banner {
+  background:
+    radial-gradient(circle at top right, rgba(199,165,91,0.13), transparent 38%),
+    linear-gradient(180deg, var(--ivory) 0%, #eee8d8 100%);
+  padding: 96px 40px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(199,165,91,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(199,165,91,0.07) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+}
+
+.cta-banner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 18px;
+  position: relative;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.cta-banner p {
+  color: var(--text-mid);
+  font-size: 1.04rem;
+  line-height: 1.85;
+  margin-bottom: 36px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.cta-banner .btn {
+  position: relative;
 }
 
 /* ── Responsive ── */
