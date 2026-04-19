@@ -88,18 +88,12 @@
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 24px;
-  display: flex;
-  align-items: center;
   text-align: center;
-  gap: 14px;
 }
 
 .hero-eyebrow::before {
-  content: '';
-  width: 34px;
-  height: 1px;
-  background: var(--accent);
-  display: inline-block;
+  content: "// ";
+  color: var(--accent);
 }
 
 .hero-title {
