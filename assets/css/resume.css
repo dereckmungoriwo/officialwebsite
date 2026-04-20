@@ -97,60 +97,87 @@
 
 /* ── Sidebar Skills ── */
 .skills-sidebar-card {
-  background: var(--surface);
-  border: 1px solid rgba(15,31,56,0.08);
+  background: #fbfaf6;
+  border: 1px solid rgba(15,31,56,0.06);
   border-radius: var(--radius-lg);
-  padding: 26px 22px;
+  padding: 22px 20px;
   margin-bottom: 18px;
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
 }
 
 .skills-sidebar-card h4 {
   font-family: var(--font-mono);
-  font-size: 0.73rem;
-  font-weight: 500;
+  font-size: 0.74rem;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-soft);
-  margin-bottom: 18px;
+  color: var(--navy);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(15,31,56,0.06);
 }
 
 .skill-bar-row {
-  margin-bottom: 14px;
-}
-
-.skill-bar-row:last-child {
-  margin-bottom: 0;
+  margin-bottom: 16px;
 }
 
 .skill-bar-label {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 0.9rem;
-  color: var(--text-mid);
-  margin-bottom: 7px;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--navy);
+  margin-bottom: 8px;
 }
 
 .skill-bar-label span:last-child {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-soft);
+  white-space: nowrap;
 }
 
 .skill-bar-track {
-  height: 5px;
-  background: rgba(15,31,56,0.08);
+  height: 4px;
+  background: rgba(15,31,56,0.07);
   border-radius: 999px;
   overflow: hidden;
 }
 
-/* FIX: added transition so the JS width animation actually plays */
 .skill-bar-fill {
   height: 100%;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--navy), var(--accent));
   transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 0%; /* start at 0, JS restores to data width once in view */
+  width: 0%;
+}
+
+.tools-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,31,56,0.08);
+  background: #f8f6f0;
+  color: var(--navy);
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.35;
+  box-shadow: none;
+  transition: border-color var(--transition), transform var(--transition), background var(--transition);
+}
+
+.tag:hover {
+  border-color: rgba(199,165,91,0.45);
+  background: #fffdf8;
+  transform: translateY(-1px);
 }
 
 /* ── Main Content ── */
